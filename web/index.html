@@ -323,9 +323,19 @@
       <section class="panel dark reveal" style="animation-delay: 0.2s">
         <h2>Connection</h2>
         <div class="mono">
-          Base URL: / (this host) Health: /health Skill: /skill.md Docs:
-          /docs.html RPC: https://api.devnet.solana.com Program:
-          EKgXT2ZBGRnCiApWJP6AQ8tP7aBumKA6k3512guLGfwH
+          Base URL: / (this host)<br />
+          Health: /health<br />
+          Skill: /skill.md<br />
+          Docs: /docs.html<br />
+          RPC: https://api.devnet.solana.com<br />
+          Program:
+          <a
+            href="https://explorer.solana.com/address/EKgXT2ZBGRnCiApWJP6AQ8tP7aBumKA6k3512guLGfwH?cluster=devnet"
+            target="_blank"
+            rel="noreferrer"
+          >
+            EKgXT2ZBGRnCiApWJP6AQ8tP7aBumKA6k3512guLGfwH
+          </a>
         </div>
       </section>
 
@@ -452,6 +462,10 @@
         return `${negative ? "-" : ""}${withCommas}${fracRaw ? "." + fracRaw : ""}`;
       }
 
+      function explorerAddress(pubkey) {
+        return `https://explorer.solana.com/address/${pubkey}?cluster=devnet`;
+      }
+
       function applyRole(role) {
         const data = roleContent[role];
         document.getElementById("role-title").textContent = data.title;
@@ -505,11 +519,16 @@
               parseRawAmount(rawReward),
               6,
             );
+            const intentLink = explorerAddress(item.pubkey);
+            const winner = item.account.winner || "";
+            const winnerCell = winner
+              ? `<a href="${explorerAddress(winner)}" target="_blank" rel="noreferrer">${winner}</a>`
+              : "-";
             row.innerHTML = `
-              <td>${item.pubkey}</td>
+              <td><a href="${intentLink}" target="_blank" rel="noreferrer">${item.pubkey}</a></td>
               <td class="status ${state}">${state}</td>
               <td title="${rawReward ?? "-"}">${rewardPretty}</td>
-              <td>${item.account.winner || "-"}</td>
+              <td>${winnerCell}</td>
             `;
             tbody.appendChild(row);
           });
