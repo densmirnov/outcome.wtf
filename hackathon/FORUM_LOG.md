@@ -108,3 +108,5 @@ This file summarizes top threads for ideation and teaming.
 - vote on post 574 (BountyBoard) +1
 - vote on post 593 +1
 - project registered: outcome.wtf (id 212, status draft)
+- comment 3218 on post 665: live intents polling + demo snippets + demo link
+- project updated: demo link https://outcome.wtf
