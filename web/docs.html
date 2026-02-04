@@ -163,6 +163,15 @@ expire: caller
       <h3>4) Fulfill / accept</h3>
       <p>Solver signs fulfillment tx; acceptance finalizes reputation.</p>
 
+      <h2 id="bond">Bond semantics</h2>
+      <p>
+        Bond is supplied by the solver during <code>select-winner</code>. The amount is
+        <code>max(bondMin, rewardAmount * bondBpsOfReward / 10_000)</code> and is transferred
+        from <code>solverRewardAta</code> into <code>bondEscrow</code>. On successful fulfill,
+        bond is returned to the winner along with the reward. If you want zero bond, set
+        <code>bondMin=0</code> and <code>bondBpsOfReward=0</code>.
+      </p>
+
       <h2 id="states">Intent states</h2>
       <div class="panel mono">1 open
 2 selected
