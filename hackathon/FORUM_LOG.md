@@ -111,3 +111,5 @@ This file summarizes top threads for ideation and teaming.
 - comment 3218 on post 665: live intents polling + demo snippets + demo link
 - project updated: demo link https://outcome.wtf
 - comment 3236 on post 665: DOKPLOY build fixed + anchor dep + npm notice suppressed
+- post 665 edited: added Human/Agent toggle + docs page + demo link
+- comment 3284 on post 665: UI refresh + docs + intents polling call for use cases
