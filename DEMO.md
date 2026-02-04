@@ -1,15 +1,21 @@
-# Demo Flow
+# Demo Flow — outcome.wtf
 
-Run the API and then execute the scripted flow:
-
+## Fast path
 ```bash
 npm run api:dev
 npm run demo:flow
 ```
 
-The script:
-1. Creates reward and output mints
-2. Builds unsigned txs via API
-3. Signs and submits create → select → fulfill
+## What the script does
+1. Creates reward/output mints
+2. Calls API tx builders (create → select → fulfill)
+3. Signs locally and submits to devnet
 
-Outputs tx signatures and the intent PDA.
+## Output
+- Intent PDA
+- Tx signatures
+
+## Troubleshooting
+- Ensure devnet keypair env is set
+- Ensure `SOLANA_RPC_URL` points to devnet
+
