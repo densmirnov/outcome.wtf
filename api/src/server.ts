@@ -33,11 +33,11 @@ app.get("/health", (_req, res) => {
 
 app.get("/intents", async (_req, res, next) => {
   try {
-    const program = getProgram();
-    const intents = await program.account.intent.all();
+    const program = getProgram() as any;
+    const intents = await (program.account as any).intent.all();
     res.json({
       count: intents.length,
-      items: intents.map((item) => ({
+      items: intents.map((item: any) => ({
         pubkey: item.publicKey.toBase58(),
         account: item.account,
       })),
@@ -49,8 +49,10 @@ app.get("/intents", async (_req, res, next) => {
 
 app.get("/intents/:intent", async (req, res, next) => {
   try {
-    const program = getProgram();
-    const intent = await program.account.intent.fetch(req.params.intent);
+    const program = getProgram() as any;
+    const intent = await (program.account as any).intent.fetch(
+      req.params.intent,
+    );
     res.json({ pubkey: req.params.intent, account: intent });
   } catch (err) {
     next(err);
@@ -59,10 +61,10 @@ app.get("/intents/:intent", async (req, res, next) => {
 
 app.get("/reputation/:solver", async (req, res, next) => {
   try {
-    const program = getProgram();
+    const program = getProgram() as any;
     const solver = new PublicKey(req.params.solver);
     const repPda = deriveReputation(program.programId, solver);
-    const rep = await program.account.reputation.fetchNullable(repPda);
+    const rep = await (program.account as any).reputation.fetchNullable(repPda);
     if (!rep) {
       res
         .status(404)

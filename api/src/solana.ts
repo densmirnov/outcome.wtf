@@ -43,14 +43,16 @@ export function getConnection() {
   return new Connection(url, "confirmed");
 }
 
-export function getProgram() {
+export function getProgram(): Program<any> {
   const idl = loadIdl();
-  const programId = new PublicKey(process.env.PROGRAM_ID || idl.address);
+  if (process.env.PROGRAM_ID) {
+    idl.address = process.env.PROGRAM_ID;
+  }
   const connection = getConnection();
   const keypair = loadKeypair();
   const wallet = new Wallet(keypair);
   const provider = new AnchorProvider(connection, wallet, {
     commitment: "confirmed",
   });
-  return new Program(idl, programId, provider);
+  return new Program(idl as any, provider as any) as Program<any>;
 }

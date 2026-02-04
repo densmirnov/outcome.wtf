@@ -7,12 +7,12 @@ const outputFile = path.join(outputDir, "intents.json");
 const intervalMs = Number(process.env.INDEXER_INTERVAL_MS || 30000);
 
 async function writeSnapshot() {
-  const program = getProgram();
-  const intents = await program.account.intent.all();
+  const program = getProgram() as any;
+  const intents = await (program.account as any).intent.all();
   const payload = {
     updatedAt: new Date().toISOString(),
     count: intents.length,
-    items: intents.map((item) => ({
+    items: intents.map((item: any) => ({
       pubkey: item.publicKey.toBase58(),
       account: item.account,
     })),

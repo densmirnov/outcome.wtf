@@ -1,4 +1,4 @@
-import { BN } from "@coral-xyz/anchor";
+import BN from "bn.js";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { getConnection, getProgram } from "./solana.js";
 
@@ -82,7 +82,7 @@ export async function buildCreateIntentTx(body: {
   feeBpsOnAccept: number;
   fixedFeeOnExpire: string | number;
 }) {
-  const program = getProgram();
+  const program = getProgram() as any;
   const payer = toPubkey(body.payer);
   const initiator = toPubkey(body.initiator);
   const intentSeed = toBn(body.intentSeed);
@@ -139,7 +139,7 @@ export async function buildSelectWinnerTx(body: {
   bondMin: string | number;
   bondBpsOfReward: number;
 }) {
-  const program = getProgram();
+  const program = getProgram() as any;
   const verifier = toPubkey(body.verifier);
   const tx = await program.methods
     .selectWinner(
@@ -174,7 +174,7 @@ export async function buildFulfillTx(body: {
   feeRecipientRewardAta: string;
   amountOut: string | number;
 }) {
-  const program = getProgram();
+  const program = getProgram() as any;
   const winner = toPubkey(body.winner);
   const reputation = deriveReputation(program.programId, winner);
   const tx = await program.methods
@@ -207,9 +207,9 @@ export async function buildExpireTx(body: {
   payerRewardAta: string;
   feeRecipientRewardAta: string;
 }) {
-  const program = getProgram();
+  const program = getProgram() as any;
   const intentPk = toPubkey(body.intent);
-  const intentAccount = await program.account.intent.fetch(intentPk);
+  const intentAccount = await (program.account as any).intent.fetch(intentPk);
   const winner = intentAccount.winner as PublicKey;
   const reputation = deriveReputation(program.programId, winner);
   const caller = toPubkey(body.caller);

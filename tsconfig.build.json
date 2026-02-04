@@ -2,10 +2,13 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./api/dist",
-    "rootDir": ".",
+    "rootDir": "./api/src",
     "declaration": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "types": ["node"],
+    "skipLibCheck": true,
+    "noImplicitAny": false,
   },
-  "include": ["api/**/*.ts"],
-  "exclude": ["tests/**/*.ts", "scripts/**/*.ts"]
+  "include": ["api/src/**/*.ts"],
+  "exclude": ["tests/**/*.ts", "scripts/**/*.ts"],
 }
