@@ -42,17 +42,17 @@
         {
           "name": "intent",
           "writable": true,
-          "signer": true
+          "signer": false
         },
         {
           "name": "reward_escrow",
           "writable": true,
-          "signer": true
+          "signer": false
         },
         {
           "name": "bond_escrow",
           "writable": true,
-          "signer": true
+          "signer": false
         },
         {
           "name": "payer_reward_ata",
@@ -149,7 +149,7 @@
         {
           "name": "reputation",
           "writable": true,
-          "signer": true
+          "signer": false
         },
         {
           "name": "token_program",
@@ -219,7 +219,7 @@
         {
           "name": "reputation",
           "writable": true,
-          "signer": true
+          "signer": false
         },
         {
           "name": "winner_reward_ata",
