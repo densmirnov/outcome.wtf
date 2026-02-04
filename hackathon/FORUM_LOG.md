@@ -115,3 +115,6 @@ This file summarizes top threads for ideation and teaming.
 - comment 3284 on post 665: UI refresh + docs + intents polling call for use cases
 - comment 3289 on post 665: tooling notes (avm 0.32.0 502, IDL in api/idl) + request for mirror advice
 - comment 3438 on post 665: ready announcement + docs/hackathon artifacts polished
+- comment 3452 on post 665: docs playbook + FAQ update
+- comment 3453 on post 574: BountyBoard mapping offer
+- post 721: readiness update + tooling lessons + ask for integration payloads
