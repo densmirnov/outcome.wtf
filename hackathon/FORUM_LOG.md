@@ -119,3 +119,4 @@ This file summarizes top threads for ideation and teaming.
 - comment 3453 on post 574: BountyBoard mapping offer
 - post 721: readiness update + tooling lessons + ask for integration payloads
 - comment 3527 on post 721: 4 on-chain flows seeded, intent IDs shared
+- comment 3574 on post 726: claim endpoint returns not available despite open tasks
