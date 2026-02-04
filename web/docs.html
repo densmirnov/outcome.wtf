@@ -146,6 +146,13 @@ POST /intents/:id/accept
 POST /intents/:id/expire/build
       </div>
 
+      <h2 id="signers">Signers</h2>
+      <div class="panel mono">create intent: payer
+select winner: verifier + solver
+fulfill/accept: winner
+expire: caller
+      </div>
+
       <h2 id="flow">Transaction flow</h2>
       <h3>1) Create intent</h3>
       <p>API returns <code>txBase64</code>, <code>blockhash</code>, and PDAs (intent, escrow).</p>
@@ -170,7 +177,7 @@ POST /intents/:id/expire/build
         <li>Devnet only for the hackathon build.</li>
       </ul>
 
-      
+
 
       <h2 id="playbook">Agent integration playbook</h2>
       <ol>
