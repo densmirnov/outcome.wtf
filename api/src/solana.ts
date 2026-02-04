@@ -6,7 +6,7 @@ import { Connection, Keypair, PublicKey } from "@solana/web3.js";
 const DEFAULT_RPC = "https://api.devnet.solana.com";
 
 function loadIdl() {
-  const idlPath = path.resolve(process.cwd(), "target/idl/outcome_market.json");
+  const idlPath = path.resolve(process.cwd(), "api/idl/outcome_market.json");
   const raw = fs.readFileSync(idlPath, "utf-8");
   return JSON.parse(raw);
 }

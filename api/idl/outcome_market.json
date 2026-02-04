@@ -1,0 +1,675 @@
+{
+  "address": "EKgXT2ZBGRnCiApWJP6AQ8tP7aBumKA6k3512guLGfwH",
+  "metadata": {
+    "name": "outcome_market",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
+  "instructions": [
+    {
+      "name": "create_intent",
+      "discriminator": [
+        216,
+        214,
+        79,
+        121,
+        23,
+        194,
+        96,
+        104
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "initiator"
+        },
+        {
+          "name": "verifier"
+        },
+        {
+          "name": "fee_recipient"
+        },
+        {
+          "name": "token_out"
+        },
+        {
+          "name": "reward_token"
+        },
+        {
+          "name": "intent",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "reward_escrow",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "bond_escrow",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "payer_reward_ata",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "intent_seed",
+          "type": "u64"
+        },
+        {
+          "name": "min_amount_out",
+          "type": "u64"
+        },
+        {
+          "name": "reward_amount",
+          "type": "u64"
+        },
+        {
+          "name": "ttl_submit",
+          "type": "i64"
+        },
+        {
+          "name": "ttl_accept",
+          "type": "i64"
+        },
+        {
+          "name": "fee_bps_on_accept",
+          "type": "u16"
+        },
+        {
+          "name": "fixed_fee_on_expire",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "expire",
+      "discriminator": [
+        243,
+        83,
+        205,
+        58,
+        57,
+        201,
+        247,
+        146
+      ],
+      "accounts": [
+        {
+          "name": "caller",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "intent",
+          "writable": true
+        },
+        {
+          "name": "reward_token",
+          "relations": [
+            "intent"
+          ]
+        },
+        {
+          "name": "reward_escrow",
+          "writable": true
+        },
+        {
+          "name": "bond_escrow",
+          "writable": true
+        },
+        {
+          "name": "payer_reward_ata",
+          "writable": true
+        },
+        {
+          "name": "fee_recipient_reward_ata",
+          "writable": true
+        },
+        {
+          "name": "reputation",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "fulfill",
+      "discriminator": [
+        143,
+        2,
+        52,
+        206,
+        174,
+        164,
+        247,
+        72
+      ],
+      "accounts": [
+        {
+          "name": "winner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "intent",
+          "writable": true
+        },
+        {
+          "name": "token_out",
+          "relations": [
+            "intent"
+          ]
+        },
+        {
+          "name": "reward_token",
+          "relations": [
+            "intent"
+          ]
+        },
+        {
+          "name": "winner_token_out_ata",
+          "writable": true
+        },
+        {
+          "name": "initiator_token_out_ata",
+          "writable": true
+        },
+        {
+          "name": "reward_escrow",
+          "writable": true
+        },
+        {
+          "name": "bond_escrow",
+          "writable": true
+        },
+        {
+          "name": "reputation",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "winner_reward_ata",
+          "writable": true
+        },
+        {
+          "name": "fee_recipient_reward_ata",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount_out",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "select_winner",
+      "discriminator": [
+        119,
+        66,
+        44,
+        236,
+        79,
+        158,
+        82,
+        51
+      ],
+      "accounts": [
+        {
+          "name": "verifier",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "solver",
+          "signer": true
+        },
+        {
+          "name": "intent",
+          "writable": true
+        },
+        {
+          "name": "reward_token",
+          "relations": [
+            "intent"
+          ]
+        },
+        {
+          "name": "solver_reward_ata",
+          "writable": true
+        },
+        {
+          "name": "bond_escrow",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "solver",
+          "type": "pubkey"
+        },
+        {
+          "name": "amount_out",
+          "type": "u64"
+        },
+        {
+          "name": "bond_min",
+          "type": "u64"
+        },
+        {
+          "name": "bond_bps_of_reward",
+          "type": "u16"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Intent",
+      "discriminator": [
+        247,
+        162,
+        35,
+        165,
+        254,
+        111,
+        129,
+        109
+      ]
+    },
+    {
+      "name": "Reputation",
+      "discriminator": [
+        55,
+        148,
+        90,
+        71,
+        68,
+        183,
+        193,
+        28
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "Accepted",
+      "discriminator": [
+        54,
+        162,
+        140,
+        167,
+        179,
+        190,
+        95,
+        70
+      ]
+    },
+    {
+      "name": "Expired",
+      "discriminator": [
+        197,
+        227,
+        104,
+        103,
+        133,
+        50,
+        207,
+        161
+      ]
+    },
+    {
+      "name": "Fulfilled",
+      "discriminator": [
+        210,
+        174,
+        131,
+        213,
+        40,
+        182,
+        83,
+        110
+      ]
+    },
+    {
+      "name": "IntentCreated",
+      "discriminator": [
+        184,
+        46,
+        156,
+        205,
+        169,
+        254,
+        11,
+        108
+      ]
+    },
+    {
+      "name": "ReputationUpdated",
+      "discriminator": [
+        26,
+        36,
+        187,
+        150,
+        235,
+        90,
+        106,
+        89
+      ]
+    },
+    {
+      "name": "WinnerSelected",
+      "discriminator": [
+        245,
+        110,
+        152,
+        173,
+        193,
+        48,
+        133,
+        5
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidAmount",
+      "msg": "Invalid amount"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidTtl",
+      "msg": "Invalid TTL"
+    },
+    {
+      "code": 6002,
+      "name": "TtlPassed",
+      "msg": "TTL passed"
+    },
+    {
+      "code": 6003,
+      "name": "TtlNotReached",
+      "msg": "TTL not reached"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidState",
+      "msg": "Invalid state"
+    },
+    {
+      "code": 6005,
+      "name": "Unauthorized",
+      "msg": "Unauthorized"
+    }
+  ],
+  "types": [
+    {
+      "name": "Accepted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "intent",
+            "type": "pubkey"
+          },
+          {
+            "name": "solver",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_out",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Expired",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "intent",
+            "type": "pubkey"
+          },
+          {
+            "name": "state",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Fulfilled",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "intent",
+            "type": "pubkey"
+          },
+          {
+            "name": "solver",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_out",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Intent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "intent_seed",
+            "type": "u64"
+          },
+          {
+            "name": "intent_bump",
+            "type": "u8"
+          },
+          {
+            "name": "state",
+            "type": "u8"
+          },
+          {
+            "name": "token_out",
+            "type": "pubkey"
+          },
+          {
+            "name": "min_amount_out",
+            "type": "u64"
+          },
+          {
+            "name": "reward_token",
+            "type": "pubkey"
+          },
+          {
+            "name": "reward_amount",
+            "type": "u64"
+          },
+          {
+            "name": "payer",
+            "type": "pubkey"
+          },
+          {
+            "name": "initiator",
+            "type": "pubkey"
+          },
+          {
+            "name": "verifier",
+            "type": "pubkey"
+          },
+          {
+            "name": "winner",
+            "type": "pubkey"
+          },
+          {
+            "name": "winner_amount_out",
+            "type": "u64"
+          },
+          {
+            "name": "bond_amount",
+            "type": "u64"
+          },
+          {
+            "name": "ttl_submit",
+            "type": "i64"
+          },
+          {
+            "name": "ttl_accept",
+            "type": "i64"
+          },
+          {
+            "name": "fee_bps_on_accept",
+            "type": "u16"
+          },
+          {
+            "name": "fixed_fee_on_expire",
+            "type": "u64"
+          },
+          {
+            "name": "fee_recipient",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "IntentCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "intent",
+            "type": "pubkey"
+          },
+          {
+            "name": "payer",
+            "type": "pubkey"
+          },
+          {
+            "name": "initiator",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Reputation",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "solver",
+            "type": "pubkey"
+          },
+          {
+            "name": "score",
+            "type": "i64"
+          },
+          {
+            "name": "last_updated",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ReputationUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "solver",
+            "type": "pubkey"
+          },
+          {
+            "name": "delta",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WinnerSelected",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "intent",
+            "type": "pubkey"
+          },
+          {
+            "name": "solver",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_out",
+            "type": "u64"
+          },
+          {
+            "name": "bond_amount",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}

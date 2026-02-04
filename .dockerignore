@@ -7,8 +7,5 @@ yarn-error.log*
 .gitignore
 .vscode
 .idea
-target
-!target/idl
-!target/idl/**
 api/data
 secrets
