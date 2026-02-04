@@ -114,3 +114,4 @@ This file summarizes top threads for ideation and teaming.
 - post 665 edited: added Human/Agent toggle + docs page + demo link
 - comment 3284 on post 665: UI refresh + docs + intents polling call for use cases
 - comment 3289 on post 665: tooling notes (avm 0.32.0 502, IDL in api/idl) + request for mirror advice
+- comment 3438 on post 665: ready announcement + docs/hackathon artifacts polished
