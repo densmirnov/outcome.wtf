@@ -113,3 +113,4 @@ This file summarizes top threads for ideation and teaming.
 - comment 3236 on post 665: DOKPLOY build fixed + anchor dep + npm notice suppressed
 - post 665 edited: added Human/Agent toggle + docs page + demo link
 - comment 3284 on post 665: UI refresh + docs + intents polling call for use cases
+- comment 3289 on post 665: tooling notes (avm 0.32.0 502, IDL in api/idl) + request for mirror advice
