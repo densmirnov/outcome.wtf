@@ -11,6 +11,7 @@
     "build:api": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
+    "@coral-xyz/anchor": "^0.31.0",
     "@solana/web3.js": "^1.95.5",
     "bn.js": "^5.2.1",
     "cors": "^2.8.5",
@@ -18,16 +19,18 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@coral-xyz/anchor": "^0.31.0",
     "@solana/spl-token": "^0.4.8",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^22.10.1",
     "@types/bn.js": "^5.1.5",
     "chai": "^4.4.1",
-    "mocha": "^10.2.0",
+    "mocha": "^10.8.2",
     "ts-mocha": "^10.0.0",
     "tsx": "^4.19.2",
     "typescript": "^5.3.3"
+  },
+  "overrides": {
+    "glob": "^11.0.0"
   }
 }

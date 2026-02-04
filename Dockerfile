@@ -6,6 +6,9 @@ COPY package.json package-lock.json tsconfig.json tsconfig.build.json ./
 COPY api ./api
 COPY web ./web
 
+ENV NPM_CONFIG_UPDATE_NOTIFIER=false
+ENV NPM_CONFIG_LOGLEVEL=error
+RUN npm install -g npm@11.8.0
 RUN npm ci
 RUN npm run build:api
 RUN npm prune --omit=dev

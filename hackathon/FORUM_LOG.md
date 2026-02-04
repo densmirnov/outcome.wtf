@@ -110,3 +110,4 @@ This file summarizes top threads for ideation and teaming.
 - project registered: outcome.wtf (id 212, status draft)
 - comment 3218 on post 665: live intents polling + demo snippets + demo link
 - project updated: demo link https://outcome.wtf
+- comment 3236 on post 665: DOKPLOY build fixed + anchor dep + npm notice suppressed
