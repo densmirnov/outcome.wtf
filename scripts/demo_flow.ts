@@ -1,7 +1,13 @@
 import fs from "fs";
 import os from "os";
 import path from "path";
-import { Keypair, PublicKey, Transaction } from "@solana/web3.js";
+import {
+  Keypair,
+  PublicKey,
+  SystemProgram,
+  Transaction,
+  sendAndConfirmTransaction,
+} from "@solana/web3.js";
 import { AnchorProvider, Wallet } from "@coral-xyz/anchor";
 import {
   TOKEN_PROGRAM_ID,
@@ -23,13 +29,19 @@ function expandHome(filePath: string) {
 
 function loadKeypair() {
   const rawPath =
-    process.env.WALLET_KEYPAIR || path.join(os.homedir(), ".config/solana/id.json");
+    process.env.WALLET_KEYPAIR ||
+    path.join(os.homedir(), ".config/solana/id.json");
   const keypairPath = expandHome(rawPath);
-  const secret = Uint8Array.from(JSON.parse(fs.readFileSync(keypairPath, "utf-8")));
+  const secret = Uint8Array.from(
+    JSON.parse(fs.readFileSync(keypairPath, "utf-8")),
+  );
   return Keypair.fromSecretKey(secret);
 }
 
-async function postJson<T>(route: string, payload: Record<string, unknown>): Promise<T> {
+async function postJson<T>(
+  route: string,
+  payload: Record<string, unknown>,
+): Promise<T> {
   const res = await fetch(`${API_URL}${route}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -56,10 +68,37 @@ async function sendUnsignedTx(
   return sig;
 }
 
+async function fundSolver(
+  provider: AnchorProvider,
+  payer: Keypair,
+  solver: Keypair,
+) {
+  try {
+    const airdropSig = await provider.connection.requestAirdrop(
+      solver.publicKey,
+      2e9,
+    );
+    await provider.connection.confirmTransaction(airdropSig, "confirmed");
+    return;
+  } catch (err) {
+    const tx = new Transaction().add(
+      SystemProgram.transfer({
+        fromPubkey: payer.publicKey,
+        toPubkey: solver.publicKey,
+        lamports: 200_000_000,
+      }),
+    );
+    await sendAndConfirmTransaction(provider.connection, tx, [payer]);
+  }
+}
+
 async function main() {
   const payer = loadKeypair();
   const provider = new AnchorProvider(
-    new (await import("@solana/web3.js")).Connection(SOLANA_RPC_URL, "confirmed"),
+    new (await import("@solana/web3.js")).Connection(
+      SOLANA_RPC_URL,
+      "confirmed",
+    ),
     new Wallet(payer),
     { commitment: "confirmed" },
   );
@@ -67,11 +106,7 @@ async function main() {
   const solver = Keypair.generate();
   const initiator = Keypair.generate();
 
-  const airdropSig = await provider.connection.requestAirdrop(
-    solver.publicKey,
-    2e9,
-  );
-  await provider.connection.confirmTransaction(airdropSig, "confirmed");
+  await fundSolver(provider, payer, solver);
 
   const rewardMint = await createMint(
     provider.connection,
@@ -161,7 +196,9 @@ async function main() {
     fixedFeeOnExpire: 0,
   });
 
-  const createSig = await sendUnsignedTx(provider, createIntent.txBase64, [payer]);
+  const createSig = await sendUnsignedTx(provider, createIntent.txBase64, [
+    payer,
+  ]);
 
   const selectWinner = await postJson<{ txBase64: string }>(
     `/intents/${createIntent.intentPda}/select-winner/build`,
@@ -177,7 +214,10 @@ async function main() {
     },
   );
 
-  const selectSig = await sendUnsignedTx(provider, selectWinner.txBase64, [payer, solver]);
+  const selectSig = await sendUnsignedTx(provider, selectWinner.txBase64, [
+    payer,
+    solver,
+  ]);
 
   const fulfill = await postJson<{ txBase64: string }>(
     `/intents/${createIntent.intentPda}/fulfill/build`,
