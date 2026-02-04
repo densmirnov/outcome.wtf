@@ -1,0 +1,10 @@
+[toolchain]
+anchor_version = "0.31.0"
+solana_version = "1.18.26"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[programs.devnet]
+outcome_market = "EKgXT2ZBGRnCiApWJP6AQ8tP7aBumKA6k3512guLGfwH"

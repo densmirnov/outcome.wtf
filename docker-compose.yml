@@ -1,0 +1,19 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8787:8787"
+    environment:
+      SOLANA_RPC_URL: "https://api.devnet.solana.com"
+      PROGRAM_ID: "EKgXT2ZBGRnCiApWJP6AQ8tP7aBumKA6k3512guLGfwH"
+      WALLET_KEYPAIR_BASE64: "${WALLET_KEYPAIR_BASE64}"
+  indexer:
+    build: .
+    command: ["node", "--enable-source-maps", "./api/dist/indexer.js"]
+    environment:
+      SOLANA_RPC_URL: "https://api.devnet.solana.com"
+      PROGRAM_ID: "EKgXT2ZBGRnCiApWJP6AQ8tP7aBumKA6k3512guLGfwH"
+      WALLET_KEYPAIR_BASE64: "${WALLET_KEYPAIR_BASE64}"
+      INDEXER_INTERVAL_MS: "30000"
+    volumes:
+      - ./api/data:/app/api/data

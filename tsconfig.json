@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": ["mocha"],
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+  },
+  "include": ["tests/**/*.ts", "api/**/*.ts", "scripts/**/*.ts"],
+}
