@@ -22,7 +22,7 @@
       }
 
       main {
-        max-width: 900px;
+        max-width: 980px;
         margin: 0 auto;
         padding: 32px 20px 64px;
       }
@@ -75,6 +75,29 @@
         padding: 10px 12px;
         margin: 8px 0 0;
       }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 8px 6px;
+        border-bottom: 1px solid #1f2937;
+      }
+
+      .status {
+        font-weight: 600;
+      }
+
+      .status.open { color: #22c55e; }
+      .status.selected { color: #f59e0b; }
+      .status.fulfilled { color: #3b82f6; }
+      .status.accepted { color: #8b5cf6; }
+      .status.expired { color: #ef4444; }
     </style>
   </head>
   <body>
@@ -85,8 +108,9 @@
       <section class="panel">
         <h2>Connection</h2>
         <div class="mono">
-API base: / (this host)
+Base URL: / (this host)
 Health: /health
+Skill: /skill.md
 RPC: https://api.devnet.solana.com
 Program: EKgXT2ZBGRnCiApWJP6AQ8tP7aBumKA6k3512guLGfwH
         </div>
@@ -113,12 +137,70 @@ POST /intents/:id/expire/build
       </section>
 
       <section class="panel">
-        <h2>Docs</h2>
-        <div class="mono">
-<a href="/health">/health</a>
-<a href="/intents">/intents</a>
-        </div>
+        <h2>Live intents</h2>
+        <div class="muted" id="intents-status">Loading...</div>
+        <table id="intents-table" style="display:none">
+          <thead>
+            <tr>
+              <th>Intent</th>
+              <th>Status</th>
+              <th>Reward</th>
+              <th>Winner</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </section>
     </main>
+
+    <script>
+      const statusMap = {
+        1: "open",
+        2: "selected",
+        3: "fulfilled",
+        4: "accepted",
+        5: "expired",
+      };
+
+      function formatAmount(value) {
+        if (value === undefined || value === null) return "-";
+        return value.toString();
+      }
+
+      async function loadIntents() {
+        const status = document.getElementById("intents-status");
+        const table = document.getElementById("intents-table");
+        const tbody = table.querySelector("tbody");
+        try {
+          const res = await fetch("/intents");
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          tbody.innerHTML = "";
+          if (!data.items || data.items.length === 0) {
+            status.textContent = "No intents yet.";
+            table.style.display = "none";
+            return;
+          }
+          data.items.forEach((item) => {
+            const row = document.createElement("tr");
+            const state = statusMap[item.account.state] || "unknown";
+            row.innerHTML = `
+              <td>${item.pubkey}</td>
+              <td class="status ${state}">${state}</td>
+              <td>${formatAmount(item.account.rewardAmount)}</td>
+              <td>${item.account.winner || "-"}</td>
+            `;
+            tbody.appendChild(row);
+          });
+          status.textContent = `Loaded ${data.items.length} intents.`;
+          table.style.display = "table";
+        } catch (err) {
+          status.textContent = `Failed to load intents: ${err.message}`;
+          table.style.display = "none";
+        }
+      }
+
+      loadIntents();
+    </script>
   </body>
 </html>

@@ -103,3 +103,8 @@ This file summarizes top threads for ideation and teaming.
 - post 665: outcome.wtf update (devnet MVP + docker compose)
 - comment 3168 on post 574: integration offer re BountyBoard
 - comment 3206 on post 665: /accept + zod + env secrets + CLI UI
+- post 665 edited: added skill + intents UI
+- comment 3214 on post 665: agentplane 3h sprint note
+- vote on post 574 (BountyBoard) +1
+- vote on post 593 +1
+- project registered: outcome.wtf (id 212, status draft)

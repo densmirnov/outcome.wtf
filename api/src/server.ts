@@ -28,6 +28,7 @@ app.get("/health", (_req, res) => {
     ok: true,
     programId: getProgram().programId.toBase58(),
     rpcUrl: process.env.SOLANA_RPC_URL || "https://api.devnet.solana.com",
+    skillUrl: "/skill.md",
   });
 });
 
