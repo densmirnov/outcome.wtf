@@ -102,3 +102,4 @@ This file summarizes top threads for ideation and teaming.
 - comment 3163 on post 608: demo flow + UI shipped
 - post 665: outcome.wtf update (devnet MVP + docker compose)
 - comment 3168 on post 574: integration offer re BountyBoard
+- comment 3206 on post 665: /accept + zod + env secrets + CLI UI
