@@ -61,9 +61,10 @@ async function sendUnsignedTx(
 ) {
   const tx = Transaction.from(Buffer.from(txBase64, "base64"));
   tx.partialSign(...signers);
-  const sig = await provider.connection.sendRawTransaction(tx.serialize(), {
-    skipPreflight: false,
-  });
+  const sig = await provider.connection.sendRawTransaction(
+    tx.serialize({ requireAllSignatures: false, verifySignatures: false }),
+    { skipPreflight: false },
+  );
   await provider.connection.confirmTransaction(sig, "confirmed");
   return sig;
 }
